@@ -13,5 +13,12 @@
             <a href="?page={{ page_obj.next_page_number }}">next</a>
             <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
+            <span class="current">
+    <a href="{% url 'expenses:expense-list' %}">expese</a>
+                     </span>
+     <span class="current">
+      <a href="{% url 'expenses:category-list' %}">category</a>
+                     </span>
+
     </span>
 </div>

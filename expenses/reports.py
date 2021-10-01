@@ -15,6 +15,23 @@ def summary_per_category(queryset):
         .values_list('category_name', 's')
     ))
 
+def summary_per(queryset):
+    return OrderedDict(sorted(
+        queryset
+        .annotate(category_name=Coalesce('category__name', Value('-')))
+        .order_by()
+        .values('category_name')
+        .annotate(s=Sum('amount'))
+        .values_list('category_name', 's')
+    ))
+
+# def summary_all(queryset):
+#     return OrderedDict(sorted(
+#         queryset
+#         .all
+#         .aggregate(sum=Sum('amount'))
+#         .values_list('sum')
+#     ))
 
 def summary_per_year_month(queryset):
     return OrderedDict(sorted(

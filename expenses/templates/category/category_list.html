@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'expenses:category-add' %}">add</a>
+    <form method="get" action="">
+        {{ form.as_p }}
+        <button type="submit">search</button>
+    </form>
+    <br>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>no.</th>
+            <th>category</th>
+            <th>expenses</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for obj in table %}
+
+            <tr>
+                <td>{{ obj.id }}.</td>
+                <td>{{ obj.name }}</td>
+                <td>{{ table2 }}</td>
+                <td>
+                    <a href="{% url 'expenses:category-edit' obj.id %}">edit</a>
+                    <a href="{% url 'expenses:category-delete' obj.id %}">delete</a>
+                    <form method="post" style="display: inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ obj.id }}">
+                        <button name="category-delete">
+                            <i>delete</i>
+                        </button>
+                    </form>
+            </tr>
+
+        {% empty %}
+            <tr>
+                <td colspan="6">no items</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include "_pagination.html" %}
+    <hr>
+{% endblock %}

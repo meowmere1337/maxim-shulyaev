@@ -8,4 +8,7 @@ urlpatterns = [
     path('expenses/',
          include(('expenses.urls', 'expenses'), namespace='expenses')
          ),
+    path('category/',
+         include(('expenses.urls', 'expenses'), namespace='expenses')
+         ),
 ]
